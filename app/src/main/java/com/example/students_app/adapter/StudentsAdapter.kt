@@ -12,6 +12,16 @@ import com.example.students_app.model.Student
 
 class StudentsAdapter(var students: List<Student>? = null) : RecyclerView.Adapter<StudentsAdapter.StudentViewHolder>() {
 
+    var listener: OnItemClickListener? = null
+
+    interface OnItemClickListener {
+        fun onItemClick(student: Student)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
     class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.student_name)
         val idTextView: TextView = itemView.findViewById(R.id.student_id)
@@ -38,6 +48,10 @@ class StudentsAdapter(var students: List<Student>? = null) : RecyclerView.Adapte
             
             holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
                 it.isChecked = isChecked
+            }
+
+            holder.itemView.setOnClickListener {
+                listener?.onItemClick(student)
             }
         }
     }

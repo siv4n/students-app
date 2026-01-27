@@ -23,6 +23,13 @@ class StudentsListActivity : AppCompatActivity() {
         studentsRecyclerView?.layoutManager = LinearLayoutManager(this)
         
         adapter = StudentsAdapter(Model.shared.getAllStudents())
+        adapter?.listener = object : StudentsAdapter.OnItemClickListener {
+            override fun onItemClick(student: Student) {
+                val intent = Intent(this@StudentsListActivity, StudentDetailsActivity::class.java)
+                intent.putExtra("student_id", student.id)
+                startActivity(intent)
+            }
+        }
         studentsRecyclerView?.adapter = adapter
 
         val fab: FloatingActionButton = findViewById(R.id.add_student_fab)
