@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.content.Intent
 import com.example.students_app.adapter.StudentsAdapter
 import com.example.students_app.model.Model
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class StudentsListActivity : AppCompatActivity() {
 
@@ -22,6 +24,12 @@ class StudentsListActivity : AppCompatActivity() {
         
         adapter = StudentsAdapter(Model.shared.getAllStudents())
         studentsRecyclerView?.adapter = adapter
+
+        val fab: FloatingActionButton = findViewById(R.id.add_student_fab)
+        fab.setOnClickListener {
+            val intent = Intent(this, NewStudentActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onResume() {
