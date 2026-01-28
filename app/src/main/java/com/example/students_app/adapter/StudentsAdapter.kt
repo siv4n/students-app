@@ -43,7 +43,7 @@ class StudentsAdapter(var students: List<Student>? = null) : RecyclerView.Adapte
         student?.let {
             holder.nameTextView.text = it.name
             holder.idTextView.text = it.id
-            holder.checkBox.setOnCheckedChangeListener(null) // Clear listener to avoid recycling issues
+            holder.checkBox.setOnCheckedChangeListener(null)
             holder.checkBox.isChecked = it.isChecked
             
             holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
