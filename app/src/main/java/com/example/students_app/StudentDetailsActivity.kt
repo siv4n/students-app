@@ -31,8 +31,28 @@ class StudentDetailsActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.details_edit_button).setOnClickListener {
-            // TODO: Implement Edit screen navigation
+            val intent = Intent(this, EditStudentActivity::class.java)
+            intent.putExtra("student_id", studentId)
+            startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val studentId = intent.getStringExtra("student_id")
+        val student = studentId?.let { Model.shared.getStudent(it) }
+
+        if (student == null) {
+            finish() // Student deleted or ID changed, close details
+            return
+        }
+
+        // Refresh view with new data
+        findViewById<TextView>(R.id.details_student_name).text = "Name: ${student.name}"
+        findViewById<TextView>(R.id.details_student_id).text = "ID: ${student.id}"
+        findViewById<TextView>(R.id.details_student_phone).text = "Phone: ${student.phone}"
+        findViewById<TextView>(R.id.details_student_address).text = "Address: ${student.address}"
+        findViewById<CheckBox>(R.id.details_student_check).isChecked = student.isChecked
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
