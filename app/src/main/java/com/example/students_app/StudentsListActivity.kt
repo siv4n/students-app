@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.content.Intent
 import com.example.students_app.adapter.StudentsAdapter
 import com.example.students_app.model.Model
+import com.example.students_app.model.Student
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class StudentsListActivity : AppCompatActivity() {
